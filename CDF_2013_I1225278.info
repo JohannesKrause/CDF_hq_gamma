@@ -1,32 +1,25 @@
 Name: CDF_2013_I1225278
 Year: 2013
-Summary: <Insert short CDF_2013_I1225278 description>
+Summary: CDF measurement of direct photon production in association with a heavy quark  
 Experiment: CDF
 Collider: Tevatron
 InspireID: 1225278
 Status: UNVALIDATED
 Authors:
- - Your Name <your@email.address>
+ - Johannes Krause  <johannes.krause1@tu-dresden.de> 
 #References:
-# - <Example: Phys.Lett.B639:151-158,2006, Erratum-ibid.B658:285-289,2008>
-# - <Example: doi:10.1016/j.physletb.2006.04.048>
-# - <Example: arXiv:hep-ex/0511054 (plus erratum)>
+ - Phys.Rev.Lett.111.042003 (2013)
+ - doi:10.1103/PhysRevLett.111.042003
+ - arXiv:hep-ex/1303.6136
 RunInfo:
-  <Insert event types (not gen-specific), energy, any kinematic
-  efficiency cut(s) that may be needed; essentially any details needed to set
-  up a generator to reproduce the data.>
+  $\gamma$+jet events at Tevatron with $\sqrt{s}=1.96$ 
 NumEvents: 1000000
-NeedCrossSection: no
-#Beams: <Insert beam pair(s), e.g. [p-, p+] or [[p-, e-], [p-, e+]]>
-#Energies: <Insert list of run energies or beam energy pairs in GeV,
-#           e.g. [1960] or [[8.0, 3.5]] or [630, 1800]. Order pairs to match "Beams">
-#PtCuts: <Insert list of kinematic pT cuts in GeV, e.g. [0, 20]>
-#NeedCrossSection: True
+NeedCrossSection: yes
+Beams: [p-, p+]
+Energies: [1960]
+PtCuts: [0]
 Description:
-  '<Insert a fairly long description, including what is measured
-  and if possible what it is useful for in terms of MC validation
-  and tuning. Use LaTeX for maths like $\pT > 50\;\GeV$.
-  Use single quotes around the block if required (see http://www.yaml.org)>'
+ 'Measurement of the differential cross section for the production of a direct photon in association with a heavy quark in a $\pT^{\gamma}$ range of 30 to 300 GeV. It is based on a luminosity of $9.1 \mathrm{fb}^{-1}$.'   
 BibKey: Aaltonen:2013ama
 BibTeX: '@article{Aaltonen:2013ama,
       author         = "Aaltonen, T. and others",

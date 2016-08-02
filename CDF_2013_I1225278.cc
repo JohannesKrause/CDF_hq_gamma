@@ -42,8 +42,8 @@ namespace Rivet {
       addProjection(FastJets(vfs, FastJets::CDFJETCLU, 0.4), "Jets");
 
       /// booking histograms
-       _h_Et_photon_charm = bookHisto1D(1, 1, 1);
-       _h_Et_photon_bottom = bookHisto1D(2, 1, 1);
+       _h_Et_photon_bottom = bookHisto1D(1, 1, 1);
+       _h_Et_photon_charm = bookHisto1D(2, 1, 1);
 
     }
 
