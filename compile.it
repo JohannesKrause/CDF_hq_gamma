@@ -1,0 +1,2 @@
+#/usr/bin/bash
+rivet-buildplugin RivetCDF_2013_I1225278.so CDF_2013_I1225278.cc
