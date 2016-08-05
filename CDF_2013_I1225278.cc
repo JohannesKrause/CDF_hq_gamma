@@ -52,11 +52,21 @@ namespace Rivet {
     void analyze(const Event& event) {
       const double weight = event.weight();
       bool check = false; //flag to stop iterating over jets
-
+      
+      // get leading photon
       Particles photons = applyProjection<LeadingParticlesFinalState>(event, "LeadingPhoton").particles();
       if (photons.size()==0)   vetoEvent;
       FourMomentum ph = photons[0].momentum();
-
+      
+      //check photon isolation
+      Particles vfs = applyProjection<VetoedFinalState>(event, "JetFS").particles();
+      FourMomentum mom_in_cone;
+      foreach (const Particle& p, vfs){
+         if (deltaR(ph, p.momentum())< 0.4) mom_in_cone +=p.momentum();
+      }
+      if (mom_in_cone.E() > 2.0*GeV) vetoEvent;
+ 
+      //get jets
       Jets jets = applyProjection<FastJets>(event, "Jets").jetsByPt(20*GeV && Cuts::abseta < 1.5);
 			if ( jets.empty() ) vetoEvent;
       
