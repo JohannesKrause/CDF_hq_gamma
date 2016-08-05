@@ -73,17 +73,19 @@ namespace Rivet {
      /// loop over jets, check if it contains bottom /charms and if the photon is outside the jet
      // break loop, if a good jet is found
       for (Jets::const_iterator jt = jets.begin(); jt!=jets.end(); ++jt){
-         if (jt->containsCharm() && deltaR(jt->momentum(), ph)>0.4){
-            check=true;
-            _h_Et_photon_charm->fill(ph.pT(), weight);
-            }
-         if (jt->containsBottom() && deltaR(jt->momentum(), ph)>0.4){
-            check=true;
-            _h_Et_photon_bottom->fill(ph.pT(), weight);
-            }
+         if (deltaR(jt->momentum(), ph)>0.4){
+            if (jt->containsCharm() ){
+               check=true;
+               _h_Et_photon_charm->fill(ph.pT(), weight);
+               }
+            if (jt->containsBottom() ){
+               check=true;
+               _h_Et_photon_bottom->fill(ph.pT(), weight);
+               }
+         }
          if (check==true) break;
+         
       }
-      
 
     }
 
