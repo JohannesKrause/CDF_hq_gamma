@@ -76,12 +76,13 @@ namespace Rivet {
          if (deltaR(jt->momentum(), ph)>0.4){
             if (jt->containsCharm() ){
                check=true;
+               MSG_DEBUG("charm found " << "\n");  
                _h_Et_photon_charm->fill(ph.pT(), weight);
-               }
+            }
             if (jt->containsBottom() ){
                check=true;
                _h_Et_photon_bottom->fill(ph.pT(), weight);
-               }
+            }
          }
          if (check==true) break;
          
@@ -93,8 +94,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-       scale(_h_Et_photon_charm, crossSection()/sumOfWeights()); // norm to cross section
-       scale(_h_Et_photon_bottom, crossSection()/sumOfWeights()); // norm to cross section
+       scale(_h_Et_photon_charm, crossSection()/sumOfWeights()/2.0); // norm to cross section
+       scale(_h_Et_photon_bottom, crossSection()/sumOfWeights()/2.0); // norm to cross section
       
 
     }
