@@ -38,6 +38,7 @@ namespace Rivet {
       vfs.addVetoOnThisFinalState(photonfs);
       addProjection(vfs, "JetFS");
      
+ 
       /// jet final state  TODO: maximal eta range?
       addProjection(FastJets(vfs, FastJets::CDFJETCLU, 0.4), "Jets");
 
@@ -59,12 +60,12 @@ namespace Rivet {
       FourMomentum ph = photons[0].momentum();
       
       //check photon isolation
-      Particles vfs = applyProjection<VetoedFinalState>(event, "JetFS").particles();
+      Particles fs = applyProjection<FinalState>(event, "FS").particles();
       FourMomentum mom_in_cone;
-      foreach (const Particle& p, vfs){
+      foreach (const Particle& p, fs){
          if (deltaR(ph, p.momentum())< 0.4) mom_in_cone +=p.momentum();
       }
-      if (mom_in_cone.E() > 2.0*GeV) vetoEvent;
+      if ( (mom_in_cone.Et() - ph.Et() ) > 2.0*GeV) vetoEvent;
  
       //get jets
       Jets jets = applyProjection<FastJets>(event, "Jets").jetsByPt(20*GeV && Cuts::abseta < 1.5);
@@ -73,7 +74,7 @@ namespace Rivet {
      /// loop over jets, check if it contains bottom /charms and if the photon is outside the jet
      // break loop, if a good jet is found
       for (Jets::const_iterator jt = jets.begin(); jt!=jets.end(); ++jt){
-         if (deltaR(jt->momentum(), ph)>0.4){
+         if (deltaR(jt->momentum(), ph)>0.4){  //probably not necessary
             if (jt->containsCharm() ){
                check=true;
                MSG_DEBUG("charm found " << "\n");  
@@ -94,8 +95,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-       scale(_h_Et_photon_charm, crossSection()/sumOfWeights()/2.0); // norm to cross section
-       scale(_h_Et_photon_bottom, crossSection()/sumOfWeights()/2.0); // norm to cross section
+       scale(_h_Et_photon_charm, crossSection()/sumOfWeights()); // norm to cross section
+       scale(_h_Et_photon_bottom, crossSection()/sumOfWeights()); // norm to cross section
       
 
     }
